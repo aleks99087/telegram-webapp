@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8"/>
+  <title>Test WebApp</title>
+</head>
+<body>
+  <div id="info">Загрузка...</div>
+  <script>
+    function checkTelegramWebApp() {
+      if (window.Telegram && window.Telegram.WebApp) {
+        const initDataUnsafe = window.Telegram.WebApp.initDataUnsafe;
+        console.log("initDataUnsafe:", initDataUnsafe);
+        document.getElementById('info').innerText = JSON.stringify(initDataUnsafe, null, 2);
+      } else {
+        document.getElementById('info').innerText = "window.Telegram.WebApp не найден! Пробуем снова...";
+        setTimeout(checkTelegramWebApp, 500); // Проверяем повторно через 500 мс
+      }
+    }
+
+    checkTelegramWebApp();
+  </script>
+</body>
+</html>
